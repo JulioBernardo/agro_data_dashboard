@@ -1,10 +1,9 @@
-import React from "react";
 import Dashboard from "./components/Dashboard";
+import '../src/styles/index.css'
 
 function App() {
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>Agro Data Dashboard</h1>
+    <div className="App">
       <Dashboard />
     </div>
   );

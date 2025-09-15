@@ -1,0 +1,73 @@
+.filters.card {
+  background-color: #ffffff; 
+  padding: 24px;
+  border-radius: 8px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  border: 1px solid #e0e0e0;
+  max-width: 400px; 
+  margin: 20px auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+}
+
+.filters h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.filters label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: -4px; 
+}
+
+
+.filters input[type="text"],
+.filters select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-sizing: border-box; 
+}
+
+.filters input[type="text"]:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #d95f1c;
+  box-shadow: 0 0 0 3px rgba(210, 114, 4, 0.25); 
+}
+
+.filters input::placeholder {
+  color: #999;
+}
+
+.apply-btn {
+  background-color: #f37021;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 16px; 
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+.apply-btn:hover {
+  background-color: #d95f1c;
+}
+
+.apply-btn:active {
+  transform: translateY(1px); 
+}
