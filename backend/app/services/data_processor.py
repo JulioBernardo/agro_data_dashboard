@@ -3,37 +3,41 @@ import pandas as pd
 class DataProcessor:
     @staticmethod
     def normalize(data: list):
-        """
-        Normaliza resposta da API SIDRA v3 (view=flat).
-        Transforma lista de dicts em DataFrame limpo.
-        """
-        if not isinstance(data, list):
-            raise ValueError("Formato inesperado: esperado list[dict]")
+        
+        # A API do IBGE retorna uma lista com o primeiro item sendo o cabeçalho
+        if not isinstance(data, list) or len(data) <= 1:
+            return pd.DataFrame()
 
+        # Criar o DataFrame a partir dos dados (lista de dicionários)
         df = pd.DataFrame(data)
 
-        # Renomear colunas de interesse, se existirem
-        col_map = {
-            "D1C": "ano",
-            "D2N": "localidade",   # nome do município/estado
-            "D3N": "produto",      # cultura agrícola
-            "V": "valor"           # valor da produção
-        }
-        for old, new in col_map.items():
-            if old in df.columns:
-                df = df.rename(columns={old: new})
+        # df.to_excel("debug_raw.xlsx")  # Linha para debug
 
-        # Ajustar tipos
-        if "ano" in df.columns:
-            df["ano"] = pd.to_numeric(df["ano"], errors="coerce")
-        if "valor" in df.columns:
-            df["valor"] = pd.to_numeric(df["valor"], errors="coerce")
+        # Mapeamento de colunas. Esses são os nomes das colunas que a API do IBGE
+        # usa para a tabela 5457.
+        col_map = {
+            'D4C': 'cultura',
+            'D1N': 'regiao',
+            'D2N': 'ano',
+        }
+
+        # Renomeia as colunas se elas existirem
+        df.rename(columns=col_map, inplace=True)
+
+        # Ajusta o tipo de dados para colunas numéricas
+        if 'ano' in df.columns:
+            df['ano'] = pd.to_numeric(df['ano'], errors='coerce')
+        
+        if 'cultura' not in df.columns:
+            df['cultura'] = None
+        if 'regiao' not in df.columns:
+            df['regiao'] = None
 
         return df
 
     @staticmethod
     def list_unique(df: pd.DataFrame, column: str):
-        """Retorna lista única de valores de uma coluna"""
-        if column not in df.columns:
+        if column not in df.columns or df[column].empty:
             return []
-        return df[column].dropna().unique().tolist()
+        
+        return sorted(df[column].dropna().unique().tolist())

@@ -3,6 +3,7 @@ import Header from "./Header";
 import Filters from "./Filters";
 import MapView from "./MapView";
 import ChartsSection from "./ChartsSection";
+import KpisSection from "./KpisSection"; // ✅ Importando os KPIs
 import type { Filtros, Dado } from "../types";
 import api from "../services/api";
 
@@ -31,15 +32,23 @@ function Dashboard() {
     <div className="dashboard">
       <Header />
       <div className="content">
+        {/* Sidebar à esquerda */}
         <aside className="sidebar">
           <Filters filtros={filtros} aplicarFiltros={aplicarFiltros} />
         </aside>
+
+        {/* Conteúdo principal */}
         <main className="main">
           <div className="map-section">
-            <MapView dados={dados} />
+            <MapView dados={dados} estadoSelecionado={filtros.regiao}/>
           </div>
           <ChartsSection dados={dados} />
         </main>
+
+        {/* KPIs à direita */}
+        <aside className="kpis-panel">
+          <KpisSection dados={dados} />
+        </aside>
       </div>
     </div>
   );
