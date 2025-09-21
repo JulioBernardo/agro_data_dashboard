@@ -1,21 +1,19 @@
-# 🌱 Agro Data Dashboard
+# 🌱 Agro Data Dashboard  
 
 Dashboard interativo para visualização de dados do agronegócio brasileiro, desenvolvido como parte de um **processo seletivo da Jacto**.  
-A aplicação consome dados da **API SIDRA/IBGE**, processa-os via backend em **Python (Flask)** e exibe-os em um frontend moderno em **React + TypeScript**, com gráficos analíticos e mapa interativo.
+A aplicação consome dados da **API SIDRA/IBGE**, processa-os via backend em **Python (Flask)** e exibe-os em um frontend em **React + TypeScript**, com gráficos analíticos e mapa interativo.  
 
 ---
 
 ## 🚀 Funcionalidades
 
 - **Filtros dinâmicos**  
-  - Seleção de tabela (1612 – Lavouras temporárias, 1613 – Lavouras permanentes, 5457 – Consolidação).  
+  - Seleção de tabela (1612 – Lavouras temporárias, 1613 – Lavouras permanentes).  
   - Filtro por **ano**, **cultura agrícola** e **região**.  
-  - Botão **Aplicar Filtros** que atualiza mapa e gráficos.
 
 - **Dashboard**  
   - **Mapa Interativo (Leaflet)**: exibição geográfica dos dados.  
   - **Gráficos Analíticos (Recharts)**:  
-    - Gráfico de barras → produção por cultura.  
     - Gráfico de linha → evolução temporal da produção.  
     - Espaços reservados para novos gráficos (ex: pizza, radar, etc).  
 
@@ -34,14 +32,36 @@ agro-data-dashboard/
 │   │── app/              # Código principal
 │   │   ├── routes.py     # Definição das rotas
 │   │   ├── services/     # Integração com a SIDRA/IBGE
+│   │   ├── config.py     # Configurações globais
 │   │   └── ...
+│   │── wsgi.py           # Ponto de entrada do backend
+│   │── requirements.txt  # Dependências Python
+│   │── Dockerfile        # Configuração de container
+│
 │── frontend/             # Interface em React + TS
 │   │── src/
 │   │   ├── components/   # Componentes da UI
 │   │   ├── services/     # Conexão com backend (axios)
 │   │   ├── types.ts      # Tipagem global
 │   │   └── App.tsx
+│   │── vite.config.ts    # Configuração Vite
+│   │── package.json      # Dependências JS
+│
 │── README.md             # Documentação
+```
+
+---
+
+## 🔄 Fluxo de Arquitetura  
+
+```mermaid
+flowchart LR
+    A[Usuário no Navegador] --> B[Frontend React + TS]
+    B -->|Axios HTTP Requests| C[Backend Flask API]
+    C -->|Consulta| D[API SIDRA/IBGE]
+    D -->|Dados em JSON| C
+    C -->|Dados processados (JSON)| B
+    B -->|Mapas e Gráficos| A
 ```
 
 ---
@@ -69,14 +89,11 @@ agro-data-dashboard/
 
 ```bash
 cd backend
-python wsgi.py
-
 pip install -r requirements.txt
 flask run --port=5000
 ```
 
-O backend estará disponível em:  
-👉 `http://localhost:5000/api`
+👉 Backend disponível em: `http://localhost:5000/api`  
 
 ---
 
@@ -88,8 +105,7 @@ npm install
 npm run dev
 ```
 
-O frontend estará disponível em:  
-👉 `http://localhost:5173`
+👉 Frontend disponível em: `http://localhost:5173`  
 
 ---
 
@@ -99,7 +115,7 @@ O frontend estará disponível em:
 - **Tabela:** `1612 – Lavouras temporárias`  
 - **Ano:** `2020`  
 - **Cultura:** `Milho`  
-- **Região:** `São Paulo`
+- **Região:** `São Paulo`  
 
 📍 O dashboard exibirá:  
 - **Mapa** com marcadores em regiões produtoras.  
@@ -109,14 +125,14 @@ O frontend estará disponível em:
 ---
 
 ## 🧩 Melhorias Futuras
-- Implementar gráficos adicionais (pizza, radar, etc).  
+- Gráficos adicionais (pizza, radar, etc).  
 - Enriquecer o mapa com **shapes oficiais dos estados/municípios** (GeoJSON).  
-- Cache de dados no backend para evitar excesso de chamadas à API do IBGE.  
-- Deploy em **Docker** para simplificar execução.  
+- Cache de dados no backend para reduzir chamadas ao IBGE.  
+- Deploy simplificado com **Docker**.  
 
 ---
 
 ## 👨‍💻 Autor
 Projeto desenvolvido por **Julio Cesar Bernardo Leite**  
 📌 Engenharia de Software | Processos e Inovação   
-🔗 [LinkedIn](https://www.linkedin.com/in/juliocbleite)
+🔗 [LinkedIn](https://www.linkedin.com/in/juliocbleite)  

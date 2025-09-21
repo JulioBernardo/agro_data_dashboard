@@ -147,7 +147,7 @@ def get_dados():
         dados_json = dados_processados.to_dict(orient="records")
 
         # Salvar também para inspeção
-        dados_processados.to_excel("dados_processados.xlsx", index=False)
+        # dados_processados.to_excel("dados_processados.xlsx", index=False)
 
         print(f"Dados processados prontos para retorno: {dados_json}")  # Log dos dados processados
 

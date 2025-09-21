@@ -18,7 +18,7 @@ class DataProcessor:
             return pd.DataFrame()
 
         df = pd.DataFrame(data)
-        df.to_excel("debug_raw_data.xlsx", index=False)
+        # df.to_excel("debug_raw_data.xlsx", index=False)
 
         col_map = {
             "D1N": "regiao",
@@ -46,31 +46,5 @@ class DataProcessor:
         # Mantém só linhas com valor
         df = df.dropna(subset=["valor"])
 
-        df.to_excel("debug_normalized_data_pos.xlsx", index=False)
+        # df.to_excel("debug_normalized_data_pos.xlsx", index=False)
         return df
-
-
-
-    @staticmethod
-    def list_unique(df: pd.DataFrame, column: str):
-        """
-        Lista valores únicos de uma coluna.
-        """
-        if column not in df.columns or df[column].empty:
-            return []
-        return sorted(df[column].dropna().unique().tolist())
-
-    @staticmethod
-    def resumo(df: pd.DataFrame):
-        """
-        Retorna estatísticas descritivas por variável/cultura/ano.
-        Ex: soma, média, mínimo e máximo.
-        """
-        if df.empty or "valor" not in df.columns:
-            return pd.DataFrame()
-
-        return (
-            df.groupby(["variavel", "cultura", "ano"], dropna=False)["valor"]
-            .agg(["sum", "mean", "min", "max", "count"])
-            .reset_index()
-        )
