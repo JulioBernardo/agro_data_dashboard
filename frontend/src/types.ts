@@ -17,6 +17,7 @@ export interface Dado {
   valor: number;
   latitude: number;
   longitude: number;
+  variavel: string;
 }
 
 export const stateCenters: Record<string, [number, number]> = {

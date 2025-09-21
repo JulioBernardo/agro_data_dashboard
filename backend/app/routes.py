@@ -149,6 +149,8 @@ def get_dados():
         # Salvar também para inspeção
         dados_processados.to_excel("dados_processados.xlsx", index=False)
 
+        print(f"Dados processados prontos para retorno: {dados_json}")  # Log dos dados processados
+
         return jsonify(dados_json)
 
 
