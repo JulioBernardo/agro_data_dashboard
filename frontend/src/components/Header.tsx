@@ -22,7 +22,7 @@ function Header() {
           // 'alt' é um texto alternativo para acessibilidade e quando a imagem não carrega.
           alt="Logo da Jacto"
           // Estilos inline para definir a largura e altura da imagem.
-          style={{ width: '120px', height: 'auto' }}
+          style={{ width: '140px', height: 'auto' }}
         />
       </div>
       {/* Um parágrafo para a frase do cabeçalho. */}

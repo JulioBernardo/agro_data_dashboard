@@ -27,7 +27,7 @@ function ChartsSection({ dados }: Props) {
 
   return (
     <div className="charts-section">
-      <h3>Dashboard de Análise Agrícola - Produção de Cebola</h3>
+      <h3>Dashboard de Análise Agrícola</h3>
       <div className="charts-grid">
         {/* Gráfico de linha: Evolução da Quantidade Produzida (Toneladas) */}
         <div className="chart card">
