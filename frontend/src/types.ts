@@ -10,16 +10,15 @@ export interface Filtros {
 export interface Dado {
   produto: string;
   rendimentoMedio: number;
-  ano: string;      
+  ano: string | number;    
   cultura: string;
   regiao: string;
   localidade: string;
   valor: number;
   latitude: number;
-  longitude: number
+  longitude: number;
 }
 
-// utils/stateCenters.ts
 export const stateCenters: Record<string, [number, number]> = {
   "Acre": [-8.77, -70.55],
   "Alagoas": [-9.62, -36.82],

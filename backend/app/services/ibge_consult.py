@@ -1,25 +1,28 @@
 import requests
-from app.config import Config
 
 class IBGEClient:
     def __init__(self):
         self.base_url = "https://servicodados.ibge.gov.br/api/v3/agregados"
 
-    def fetch_table(self, table_id: int, periodos, variavel, localidades, view):
+    def fetch_table(self, table_id, periodos, variavel, localidades, view="flat", classificacao=None):
         """
-        Consulta dados da API v3 SIDRA/IBGE.
-        - table_id: código da tabela/agregado (ex: 1612, 1613, 5457)
-        - periodos: "all" ou string com períodos separados por ; (ex: "2020;2021")
-        - variavel: "all" ou id da variável
-        - localidades: nível territorial, ex: "N6[all]" para municípios
-        - view: "flat" para resposta amigável
+        Busca dados na API SIDRA.
         """
         url = f"{self.base_url}/{table_id}/periodos/{periodos}/variaveis/{variavel}"
+
         params = {
             "localidades": localidades,
             "view": view
         }
+        if classificacao:
+            params["classificacao"] = classificacao
+
         resp = requests.get(url, params=params)
+        print(f"Requisição para URL: {resp.url}")  # Log da URL completa
         resp.raise_for_status()
+        # print(f"Resposta da API: {resp.json()}")  # Log da resposta da API
         return resp.json()
-    
+
+
+
+
